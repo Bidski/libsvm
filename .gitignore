@@ -2,4 +2,5 @@ svm-predict
 svm-scale
 svm-train
 *.o
+*.so*
 
