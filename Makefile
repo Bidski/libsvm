@@ -4,7 +4,7 @@ SHVER = 2
 OS = $(shell uname)
 PREFIX = /usr/local
 
-all: svm-train svm-predict svm-scale
+all: svm-train svm-predict svm-scale lib
 
 lib: svm.o
 	if [ "$(OS)" = "Darwin" ]; then \
@@ -29,6 +29,10 @@ install: all
 	test -d $(PREFIX) || mkdir -p $(PREFIX)
 	test -d $(PREFIX)/include || mkdir -p $(PREFIX)/include
 	test -d $(PREFIX)/lib || mkdir -p $(PREFIX)/lib
+	test -d $(PREFIX)/bin || mkdir -p $(PREFIX)/bin
 	install -m 0644 svm.h $(PREFIX)/include
-	install -m 0755 svm.o $(PREFIX)/lib
+	install -m 0755 libsvm.so.$(SHVER) $(PREFIX)/lib
+	install -m 0755 svm-train $(PREFIX)/bin
+	install -m 0755 svm-scale $(PREFIX)/bin
+	install -m 0755 svm-predict $(PREFIX)/bin
 
